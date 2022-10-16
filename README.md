@@ -1,6 +1,6 @@
 # startup_namer
 
-A new Flutter project.
+My first Flutter project. Following instructions from [here](https://docs.flutter.dev/get-started/codelab)
 
 ## Getting Started
 
