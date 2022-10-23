@@ -37,7 +37,12 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 24, color: Colors.blue);
+
+  // Stores a set of Word Pairs - does not allow dupes
+  final _saved = <WordPair>{};
+
+  final _biggerFont =
+      const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +55,19 @@ class _RandomWordsState extends State<RandomWords> {
         if (index >= _suggestions.length) {
           _suggestions.addAll(generateWordPairs().take(10)); /*4*/
         }
+
+        // Checks whether the wordPair is already saved in the set
+        final alreadySaved = _saved.contains(_suggestions[index]);
+
         return ListTile(
           title: Text(
             _suggestions[index].asPascalCase,
             style: _biggerFont,
+          ),
+          trailing: Icon(
+            alreadySaved ? Icons.favorite : Icons.favorite_border,
+            color: alreadySaved ? Colors.red : null,
+            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
           ),
         );
       },
